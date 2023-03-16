@@ -1,5 +1,7 @@
 package telran.test;
 
+import static org.junit.Assert.*;
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -44,7 +46,7 @@ class StandardCollectionTest {
 	}
 	//HW33
 	@Test
-	
+	@Disabled
 	void displayDigitStatistics() {
 		//int[] array = getRandomArray(1000000);
 		new Random().ints(1_000_000, 1, Integer.MAX_VALUE)
@@ -79,6 +81,7 @@ class StandardCollectionTest {
 	
 	
 	@Test
+	@Disabled
 	void stackIntTest() {
 		StackInt stackInt = new StackInt();
 		stackInt.push(1);
@@ -91,8 +94,69 @@ class StandardCollectionTest {
 		assertEquals(3, stackInt.pop());
 		assertEquals(2, stackInt.getMax());
 	}
+	//HW34 task 1 of 2
+	@Test
+	@Disabled
+	void maxNumberWithNegativeImageTest() {
+		int ar[] = {10000000, 3, -2, -200, 200, -3, 2};
+		int ar1[] = {1000000, -1000000000, 3, -4};
+		assertEquals(200, maxNumberWithNegativeImage(ar));
+		assertEquals(-1, maxNumberWithNegativeImage(ar1));
+	}
 	
+	private Integer maxNumberWithNegativeImage(int[] ar) {
+		int res = -1;
+		Set<Integer> items = new HashSet<>(ar[0]);
+		for (int i = 1; i < ar.length; i++) {
+			if (items.contains(-ar[i])) {
+				res = compare(res, Math.abs(ar[i]));
+			} else {
+				items.add(ar[i]);
+			}
+		}
+		return res;		
+	}
+
+	private int compare(int res, int i) {		
+		return res > i ? res : i;
+	}
 	
+	/* O[n^2] ?
+	private Integer maxNumberWithNegativeImage(int[] ar) {
+		int res = -1;
+		Set<Integer> items = new HashSet<>();
+		Arrays.stream(ar).filter(x -> x < 0).forEach(x -> items.add(x));
+		
+		for (int i = 0; i < ar.length; i++)
+			if (ar[i] > 0 && items.contains(-ar[i])) {
+				if (ar[i] > res) {
+					res = ar[i];
+				}
+			}
+		return res;
+	}	*/
+	
+	//HW34 task 2 of 2
+	@Test
+	void treeIteratingTest() {
+		Integer array[] = {1, 11, 111, 32, 9, 1234, 99, 992};
+		createAndIterateTreeInOrder(array);
+	}
+	private void createAndIterateTreeInOrder(Integer[] array) {
+		// TODO 
+		//create tree, add in tree numbers from a given array
+		//and iterate in the order of array defined in 69
+		TreeSet<Integer> treeSet = new TreeSet<Integer>((x1, x2) -> Integer.compare(sumDigits(x1), sumDigits(x2)));
+		Arrays.stream(array).forEach(x -> treeSet.add(x));
+		assertArrayEquals(array, treeSet.toArray());
+		System.out.println(treeSet);
+		
+
+	}
+
+	private int sumDigits(Integer x) { 
+		return x.toString().chars().map(digit -> digit - '0').sum();
+	}
 
 
 }
