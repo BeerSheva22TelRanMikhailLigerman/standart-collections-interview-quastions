@@ -4,8 +4,8 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeMap;
 public interface MultiCounters {
-	HashMap<Object, Integer> items = new HashMap<>();
-	TreeMap<Integer, HashSet<Object>> counters = new TreeMap<>();
+	//HashMap<Object, Integer> items = new HashMap<>();
+	//TreeMap<Integer, HashSet<Object>> counters = new TreeMap<>();
 /**
 * @param item
 * @return How many times the item has been added

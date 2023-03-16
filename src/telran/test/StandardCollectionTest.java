@@ -121,7 +121,7 @@ class StandardCollectionTest {
 		return res > i ? res : i;
 	}
 	
-	/* O[n^2] ?
+	/* ? complexity is O[n]?
 	private Integer maxNumberWithNegativeImage(int[] ar) {
 		int res = -1;
 		Set<Integer> items = new HashSet<>();
