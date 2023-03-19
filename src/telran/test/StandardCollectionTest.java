@@ -146,16 +146,13 @@ class StandardCollectionTest {
 		// TODO 
 		//create tree, add in tree numbers from a given array
 		//and iterate in the order of array defined in 69
-		TreeSet<Integer> treeSet = new TreeSet<Integer>((x1, x2) -> Integer.compare(sumDigits(x1), sumDigits(x2)));
-		Arrays.stream(array).forEach(x -> treeSet.add(x));
-		assertArrayEquals(array, treeSet.toArray());
-		System.out.println(treeSet);
-		
-
+		TreeSet<Integer> tree = new TreeSet<Integer>((x1, x2) -> Integer.compare(sumOfDigits(x1), sumOfDigits(x2)));
+		Arrays.stream(array).forEach(x -> tree.add(x));
+		assertArrayEquals(array, tree.toArray());				
 	}
 
-	private int sumDigits(Integer x) { 
-		return x.toString().chars().map(digit -> digit - '0').sum();
+	private int sumOfDigits(Integer x) {		
+		return x.toString().chars().map(symbol -> symbol - '0').sum();
 	}
 
 
